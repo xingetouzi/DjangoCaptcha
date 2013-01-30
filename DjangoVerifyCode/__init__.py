@@ -14,7 +14,7 @@ class Code(object):
         """
         self.django_request = request
         self.session_key = 'django-verify-code'
-        self.worlds = self._get_worlds()
+        self.words = self._get_words()
 
         # 验证码图片尺寸
         self.img_width = 150
@@ -30,11 +30,11 @@ class Code(object):
         print 's1',s1,'s2',s2
         return int(min((s1,s2)) + max((s1,s2))*0.05)
 
-    def _get_worlds(self):
+    def _get_words(self):
         """
         读取默认的单词表
         """
-        file_path = os.path.join(current_path,'worlds.list')
+        file_path = os.path.join(current_path,'words.list')
         f = open(file_path,'r')
         return [line.replace('\n','') for line in f.readlines()]
 
@@ -47,7 +47,7 @@ class Code(object):
 
         # 英文单词验证码
         def world():
-            code = random.sample(self.worlds,1)[0]
+            code = random.sample(self.words,1)[0]
             self._set_answer(code)
             return code
 
@@ -87,7 +87,7 @@ class Code(object):
         #self.font_path = os.path.join(current_path,'Menlo.ttc')
 
 
-        # the worlds list maxlength = 8
+        # the words list maxlength = 8
         self.django_request.session[self.session_key] = '' 
         # creat a image
         im = Image.new('RGB',(self.img_width,self.img_height),self.background)

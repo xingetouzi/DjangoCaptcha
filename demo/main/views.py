@@ -7,7 +7,7 @@ from DjangoVerifyCode import Code
 
 def code(request):
     code =  Code(request)
-    code.worlds = ['hello','world','helloworld']
+    code.words = ['hello','world','helloworld']
     #code.type = 'world'
     code.type = 'number'
     return code.display()
