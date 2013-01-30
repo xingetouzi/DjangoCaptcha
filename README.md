@@ -10,15 +10,15 @@ DjangoVerifyCode v0.2.0
 + 字体尺寸根据图片长宽自适应
 
 
-使用
+Usage
 ---
-####安装####
+####Install####
 ```
 pip install DjangoVerifyCode
 or
 easy_install DjangoVerifyCode
 ```
-####显示验证码(views.py)####
+####Display(views.py)####
 ```
 from DjangoVerifyCode import Code
 def code(request):
@@ -29,7 +29,7 @@ def code(request):
     return code.display()
 ```
 
-####检查用户输入的验证码是否正确(views.py)####
+####Check user input(views.py)####
 ```
 from DjangoVerifyCode import Code
 def index(request):
@@ -44,17 +44,16 @@ def index(request):
         return HttpResponse('验证失败')
 ```
 
-自定义
+Custom
 -----
-用户可根据自己的需要对DjangoVerifyCode.Code对象的属性进行设置
-##### 输出图片的宽度 
+##### width of image
 `code.img_width` = 150
-##### 输出图片的高度 
+##### height of image 
 `code.img_height` = 30
-##### 设置验证码类型('number'/'world')
+##### type fo code ('number'/'world')
 `code.type = 'number'`
 
-依赖
+Rely on
 ----
 + PIL
 
