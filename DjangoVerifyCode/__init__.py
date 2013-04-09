@@ -149,8 +149,9 @@ class Code(object):
         检查用户输入的验证码是否正确 
         """
         _code = self.django_request.session.get(self.session_key) or ''
-        code = str(code).lower()
-        return _code.lower() == code
+        if not _code:
+            return False
+        return _code.lower() == str(code).lower()
 
 if __name__ == '__main__':
     import mock
