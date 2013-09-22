@@ -4,7 +4,7 @@ import Image,ImageDraw,ImageFont,random,StringIO
 import os
 from math import ceil
 
-__version__ = '0.2.5',  
+__version__ = '0.2.6',  
 
 current_path = os.path.normpath(os.path.dirname(__file__))
 
