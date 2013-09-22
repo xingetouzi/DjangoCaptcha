@@ -23,8 +23,7 @@ easy_install DjangoCaptcha
 from DjangoCaptcha import Code
 def code(request):
     code =  Code(request)
-    code.worlds = ['hello','world','helloworld']
-    #code.type = 'world'
+    code.words = ['hello','world','helloworld']
     code.type = 'number'
     return code.display()
 ```
@@ -50,7 +49,7 @@ Custom
 `code.img_width` = 150
 ##### height of image 
 `code.img_height` = 30
-##### type fo code ('number'/'world')
+##### type fo code ('number'/'word')
 `code.type = 'number'`
 
 Rely on

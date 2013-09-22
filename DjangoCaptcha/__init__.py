@@ -16,7 +16,7 @@ class Code(object):
         """
         self.django_request = request
         self.session_key = 'django-verify-code'
-        self.worlds = self._get_worlds()
+        self.words = self._get_words()
 
         # 验证码图片尺寸
         self.img_width = 150
@@ -29,11 +29,11 @@ class Code(object):
         s2 = int(self.img_width/len(self.code))
         return int(min((s1,s2)) + max((s1,s2))*0.05)
 
-    def _get_worlds(self):
+    def _get_words(self):
         """
         读取默认的单词表
         """
-        file_path = os.path.join(current_path,'worlds.list')
+        file_path = os.path.join(current_path,'words.list')
         f = open(file_path,'r')
         return [line.replace('\n','') for line in f.readlines()]
 
@@ -45,8 +45,8 @@ class Code(object):
         """ 生成验证码文字,以及答案"""
 
         # 英文单词验证码
-        def world():
-            code = random.sample(self.worlds,1)[0]
+        def word():
+            code = random.sample(self.words,1)[0]
             self._set_answer(code)
             return code
 
@@ -86,7 +86,7 @@ class Code(object):
         #self.font_path = os.path.join(current_path,'Menlo.ttc')
 
 
-        # the worlds list maxlength = 8
+        # the words list maxlength = 8
         self.django_request.session[self.session_key] = '' 
         # creat a image
         im = Image.new('RGB',(self.img_width,self.img_height),self.background)
@@ -99,7 +99,7 @@ class Code(object):
         draw = ImageDraw.Draw(im)
 
         # 画随机干扰线,字数越少,干扰线越多
-        if self.type == 'world':
+        if self.type == 'word':
             c = int(8/len(self.code)*15) or 15
         elif self.type == 'number':
             c = 4

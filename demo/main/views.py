@@ -9,7 +9,7 @@ def code(request):
     code =  Code(request)
     code.worlds = ['hello','world','helloworld']
     code.type = 'number'
-    code.type = 'world'
+    code.type = 'word'
     return code.display()
 
 def index(request):
