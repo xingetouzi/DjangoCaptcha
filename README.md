@@ -58,6 +58,4 @@ Rely on
 
 More
 ----
-+ demo <http://dvf.pythoner.net>
 + <http://pythoner.net>
-+ <http://pypi.python.org/pypi/DjangoVerifyCode>
