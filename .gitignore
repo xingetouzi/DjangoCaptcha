@@ -1,8 +1,9 @@
-<<<<<<< HEAD
 #################
 ## Eclipse
 #################
 
+
+*.pyc
 *.pydevproject
 .project
 .metadata

@@ -3,12 +3,11 @@ from django.http import HttpResponse
 import Image,ImageDraw,ImageFont,random,StringIO
 import os
 from django.shortcuts import render_to_response as render
-from DjangoCaptcha import Code
+from DjangoVerifyCode import Code
 
 def code(request):
     code =  Code(request)
-    code.worlds = ['hello','world','helloworld']
-    code.type = 'number'
+    code.worlds = ['a','ab','abc','world','helloworld']
     code.type = 'world'
     return code.display()
 

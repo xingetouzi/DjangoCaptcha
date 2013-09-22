@@ -1,4 +1,4 @@
-DjangoVerifyCode v0.2.0
+DjangoCaptcha 
 =======================
 介绍
 ----
@@ -14,13 +14,13 @@ Usage
 ---
 ####Install####
 ```
-pip install DjangoVerifyCode
+pip install DjangoCaptcha
 or
-easy_install DjangoVerifyCode
+easy_install DjangoCaptcha
 ```
 ####Display(views.py)####
 ```
-from DjangoVerifyCode import Code
+from DjangoCaptcha import Code
 def code(request):
     code =  Code(request)
     code.worlds = ['hello','world','helloworld']
@@ -31,7 +31,7 @@ def code(request):
 
 ####Check user input(views.py)####
 ```
-from DjangoVerifyCode import Code
+from DjangoCaptcha import Code
 def index(request):
     _code = request.GET.get('code') or ''
     if not _code:
