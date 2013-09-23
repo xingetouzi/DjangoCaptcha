@@ -1,5 +1,9 @@
 DjangoCaptcha 
 =======================
+
+![image](https://travis-ci.org/tianyu0915/DjangoCaptcha.png)
+[![PyPI version](https://badge.fury.io/py/DjangoCaptcha.png)](http://badge.fury.io/py/DjangoCaptcha)
+
 介绍
 ----
 在django中生成英文单词验证码,提供验证码图片生成,检查验证码等功能
