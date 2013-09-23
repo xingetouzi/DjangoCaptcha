@@ -8,6 +8,7 @@ setup(name='DjangoCaptcha',
       keywords ='django verify code 验证码',
       url='http://github.com/tianyu0915/DjangoCaptcha',  
       packages=['DjangoCaptcha'],  
+      install_requires=['PIL'],
       package_data={'DjangoCaptcha':['*.*','DjangoCaptcha/*.*']},
 
 )  
