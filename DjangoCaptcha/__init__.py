@@ -22,18 +22,18 @@ import Image,ImageDraw,ImageFont,random,StringIO
 import os
 from math import ceil
 
-__version__ = '0.2.6',  
+__version__ = '0.2.7',  
 
 current_path = os.path.normpath(os.path.dirname(__file__))
 
-class Code(object):
+class Captcha(object):
 
     def __init__(self,request):
-        """
-        初始化,设置各种属性
+        """   初始化,设置各种属性
+
         """
         self.django_request = request
-        self.session_key = 'django-verify-code'
+        self.session_key = '_django_captcha_key'
         self.words = self._get_words()
 
         # 验证码图片尺寸
@@ -42,25 +42,33 @@ class Code(object):
         self.type = 'number'
 
     def _get_font_size(self):
-        """ 将图片高度的80%作为字体大小"""
+        """  将图片高度的80%作为字体大小
+
+        """
         s1 = int(self.img_height * 0.8)
         s2 = int(self.img_width/len(self.code))
         return int(min((s1,s2)) + max((s1,s2))*0.05)
 
     def _get_words(self):
+        """   读取默认的单词表
+
         """
-        读取默认的单词表
-        """
+        #TODO  扩充单词表
+
         file_path = os.path.join(current_path,'words.list')
         f = open(file_path,'r')
         return [line.replace('\n','') for line in f.readlines()]
 
     def _set_answer(self,answer):
-        """ 设置答案"""
+        """  设置答案
+        
+        """
         self.django_request.session[self.session_key] = str(answer)
 
     def _yield_code(self):
-        """ 生成验证码文字,以及答案"""
+        """  生成验证码文字,以及答案
+        
+        """
 
         # 英文单词验证码
         def word():
@@ -89,34 +97,33 @@ class Code(object):
         return fun()
 
     def display(self):
-        """ 
-        验证码生成 
+        """  生成验证码图片
         """
 
-        # 验证码字体颜色
+        # font color
         self.font_color = ['black','darkblue','darkred']
 
-        # 随即背景颜色
+        # background color
         self.background = (random.randrange(230,255),random.randrange(230,255),random.randrange(230,255))
 
-        # 字体文件路径
+        # font path
         self.font_path = os.path.join(current_path,'timesbi.ttf')
         #self.font_path = os.path.join(current_path,'Menlo.ttc')
 
-
         # the words list maxlength = 8
         self.django_request.session[self.session_key] = '' 
+
         # creat a image
         im = Image.new('RGB',(self.img_width,self.img_height),self.background)
         self.code = self._yield_code()
 
-        # 更具图片大小自动调整字体大小 
+        # set font size automaticly
         self.font_size = self._get_font_size()
 
         # creat a pen
         draw = ImageDraw.Draw(im)
 
-        # 画随机干扰线,字数越少,干扰线越多
+        # draw noisy point/line
         if self.type == 'word':
             c = int(8/len(self.code)*15) or 15
         elif self.type == 'number':
@@ -134,10 +141,10 @@ class Code(object):
             #draw.arc(xy,fill=line_color,width=int(self.font_size*0.1))
         #draw.arc(xy,0,1400,fill=line_color)
 
-        # 写验证码
+        # draw code
         j = int(self.font_size*0.3)
         k = int(self.font_size*0.5)
-        x = random.randrange(j,k) #起始位置
+        x = random.randrange(j,k) #starts point
         for i in self.code:
             # 上下抖动量,字数越多,上下抖动越大
             m = int(len(self.code))
@@ -170,8 +177,14 @@ class Code(object):
             return False
         return _code.lower() == str(code).lower()
 
+class Code(Captcha):
+    """
+    compatibility for less than v2.0.6 
+    """
+    pass
+
 if __name__ == '__main__':
     import mock
     request = mock.Mock()
-    c = Code(request)
+    c = Captcha(request)
 

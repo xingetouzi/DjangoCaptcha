@@ -24,24 +24,24 @@ easy_install DjangoCaptcha
 ```
 ####Display(views.py)####
 ```
-from DjangoCaptcha import Code
+from DjangoCaptcha import Captcha
 def code(request):
-    code =  Code(request)
-    code.words = ['hello','world','helloworld']
-    code.type = 'number'
-    return code.display()
+    ca =  Captcha(request)
+    ca.words = ['hello','world','helloworld']
+    ca.type = 'number'
+    return ca.display()
 ```
 
 ####Check user input(views.py)####
 ```
-from DjangoCaptcha import Code
+from DjangoCaptcha import Captcha
 def index(request):
     _code = request.GET.get('code') or ''
     if not _code:
         return render('index.html',locals())
 
-    code = Code(request)
-    if code.check(_code):
+    ca = Captcha(request)
+    if ca.check(_code):
         return HttpResponse('验证成功')
     else:
         return HttpResponse('验证失败')
@@ -50,11 +50,11 @@ def index(request):
 Custom
 -----
 ##### width of image
-`code.img_width` = 150
+`ca.img_width` = 150
 ##### height of image 
-`code.img_height` = 30
+`ca.img_height` = 30
 ##### type fo code ('number'/'word')
-`code.type = 'number'`
+`ca.type = 'number'`
 
 Rely on
 ----
