@@ -10,7 +10,7 @@ def code(request):
     ca.worlds = ['hello','world','helloworld']
     ca.type = 'number'
     ca.type = 'word'
-    return code.display()
+    return ca.display()
 
 def index(request):
     _code = request.GET.get('code') or ''
