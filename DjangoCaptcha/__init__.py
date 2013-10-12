@@ -18,11 +18,12 @@ limitations under the License.
 """
 
 from django.http import HttpResponse
-import Image,ImageDraw,ImageFont,random,StringIO
+from PIL import Image,ImageDraw,ImageFont
+import random,StringIO
 import os
 from math import ceil
 
-__version__ = '0.2.7',  
+__version__ = '0.2.8',  
 
 current_path = os.path.normpath(os.path.dirname(__file__))
 
