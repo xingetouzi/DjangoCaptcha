@@ -23,7 +23,7 @@ import random,StringIO
 import os
 from math import ceil
 
-__version__ = '0.2.8',  
+__version__ = '0.2.9',  
 
 current_path = os.path.normpath(os.path.dirname(__file__))
 
