@@ -126,7 +126,7 @@ class Captcha(object):
 
         # draw noisy point/line
         if self.type == 'word':
-            c = int(8/len(self.code)*15) or 15
+            c = int(8/len(self.code)*3) or 3
         elif self.type == 'number':
             c = 4
 
