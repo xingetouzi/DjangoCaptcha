@@ -28,8 +28,22 @@ from DjangoCaptcha import Captcha
 def code(request):
     ca =  Captcha(request)
     ca.words = ['hello','world','helloworld']
-    ca.type = 'number'
+    ca.type = 'word'
     return ca.display()
+```
+or 
+
+```
+from DjangoCaptcha import Captcha
+def code(request):
+    figures         = [2,3,4,5,6,7,8,9]
+    ca              = Captcha(request)
+    ca.words        = [''.join([str(random.sample(figures,1)[0]) for i in range(0,4)])]
+    ca.type         = 'word'
+    ca.img_width    = 100
+    ca.img_height   = 30
+    return ca.display()
+
 ```
 
 ####Check user input(views.py)####
