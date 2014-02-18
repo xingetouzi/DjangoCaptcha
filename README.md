@@ -70,9 +70,6 @@ Custom
 ##### type fo code ('number'/'word')
 `ca.type = 'number'`
 
-Rely on
-----
-+ PIL
 
 More
 ----
