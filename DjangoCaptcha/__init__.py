@@ -173,14 +173,12 @@ class Captcha(object):
         """ 
         检查用户输入的验证码是否正确 
         """
+
         _code = self.django_request.session.get(self.session_key) or ''
-        if not _code:
-            return False
         
-        res = _code.lower() == str(code).lower()
-        # clean 
         self.django_request.session[self.session_key] = ''
-        return res
+        return _code.lower() == str(code).lower()
+
 
 
 class Code(Captcha):
