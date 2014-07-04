@@ -111,7 +111,7 @@ class Captcha(object):
         self.font_path = os.path.join(current_path,'timesbi.ttf')
         #self.font_path = os.path.join(current_path,'Menlo.ttc')
 
-        # the words list maxlength = 8
+        # clean
         self.django_request.session[self.session_key] = '' 
 
         # creat a image
@@ -176,7 +176,12 @@ class Captcha(object):
         _code = self.django_request.session.get(self.session_key) or ''
         if not _code:
             return False
-        return _code.lower() == str(code).lower()
+        
+        res = _code.lower() == str(code).lower()
+        # clean 
+        self.django_request.session[self.session_key] = ''
+        return res
+
 
 class Code(Captcha):
     """
