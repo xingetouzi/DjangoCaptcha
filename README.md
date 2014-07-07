@@ -14,7 +14,7 @@ DjangoCaptcha
 + 字体尺寸根据图片长宽自适应
 
 
-Usage
+Start
 ---
 ####Install####
 ```
@@ -61,7 +61,7 @@ def index(request):
         return HttpResponse('验证失败')
 ```
 
-Custom
+Config
 -----
 ##### width of image
 `ca.img_width` = 150
