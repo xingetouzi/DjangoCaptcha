@@ -173,9 +173,10 @@ class Captcha(object):
         """ 
         检查用户输入的验证码是否正确 
         """
+        if not code:
+            return False
 
         _code = self.django_request.session.get(self.session_key) or ''
-        
         self.django_request.session[self.session_key] = ''
         return _code.lower() == str(code).lower()
 
