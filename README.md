@@ -46,7 +46,7 @@ def code(request):
 
 ```
 
-####Check user input(views.py)####
+####Check user's input(views.py)####
 ```
 from DjangoCaptcha import Captcha
 def index(request):
