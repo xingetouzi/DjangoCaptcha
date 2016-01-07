@@ -1,7 +1,5 @@
 DjangoCaptcha 
 =======================
-
-![image](https://travis-ci.org/tianyu0915/DjangoCaptcha.png)
 [![PyPI version](https://badge.fury.io/py/DjangoCaptcha.png)](http://badge.fury.io/py/DjangoCaptcha)
 
 
