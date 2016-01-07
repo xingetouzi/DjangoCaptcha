@@ -35,12 +35,14 @@ class Captcha(object):
         """
         self.django_request = request
         self.session_key = '_django_captcha_key'
-        self.words = self._get_words()
+        self.words = []
 
-        # 验证码图片尺寸
+        # image size (pix)
         self.img_width = 150
         self.img_height = 30
-        self.type = 'number'
+
+        # default type
+        self.type = 'number' 
 
     def _get_font_size(self):
         """  将图片高度的80%作为字体大小
@@ -54,11 +56,14 @@ class Captcha(object):
         """   读取默认的单词表
 
         """
-        #TODO  扩充单词表
+        # TODO  扩充单词表
+
+        if self.words:
+            return set(self.words)
 
         file_path = os.path.join(current_path,'words.list')
         f = open(file_path,'r')
-        return [line.replace('\n','') for line in f.readlines()]
+        return set([line.replace('\n','') for line in f.readlines()])
 
     def _set_answer(self,answer):
         """  设置答案
@@ -73,7 +78,7 @@ class Captcha(object):
 
         # 英文单词验证码
         def word():
-            code = random.sample(self.words,1)[0]
+            code = random.sample(self._get_words(), 1)[0]
             self._set_answer(code)
             return code
 
@@ -111,17 +116,17 @@ class Captcha(object):
         self.font_path = os.path.join(current_path,'timesbi.ttf')
         #self.font_path = os.path.join(current_path,'Menlo.ttc')
 
-        # clean
+        # clean sesson
         self.django_request.session[self.session_key] = '' 
 
-        # creat a image
+        # creat a image picture
         im = Image.new('RGB',(self.img_width,self.img_height),self.background)
         self.code = self._yield_code()
 
         # set font size automaticly
         self.font_size = self._get_font_size()
 
-        # creat a pen
+        # creat
         draw = ImageDraw.Draw(im)
 
         # draw noisy point/line
@@ -142,7 +147,7 @@ class Captcha(object):
             #draw.arc(xy,fill=line_color,width=int(self.font_size*0.1))
         #draw.arc(xy,0,1400,fill=line_color)
 
-        # draw code
+        # code part
         j = int(self.font_size*0.3)
         k = int(self.font_size*0.5)
         x = random.randrange(j,k) #starts point
@@ -169,10 +174,11 @@ class Captcha(object):
         buf.closed
         return HttpResponse(buf.getvalue(),'image/gif')
 
-    def check(self,code):
+    def validate(self, code):
         """ 
         检查用户输入的验证码是否正确 
         """
+
         if not code:
             return False
 
@@ -180,6 +186,8 @@ class Captcha(object):
         self.django_request.session[self.session_key] = ''
         return _code.lower() == str(code).lower()
 
+    def check(self,code):
+        return self.validate(code)
 
 
 class Code(Captcha):
