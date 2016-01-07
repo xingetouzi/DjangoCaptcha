@@ -4,26 +4,31 @@ DjangoCaptcha
 ![image](https://travis-ci.org/tianyu0915/DjangoCaptcha.png)
 [![PyPI version](https://badge.fury.io/py/DjangoCaptcha.png)](http://badge.fury.io/py/DjangoCaptcha)
 
+
 介绍
 ----
 在django中生成英文单词验证码,提供验证码图片生成,检查验证码等功能
-原用于[pythoner.net](http://pythoner.net)的验证码,现整理出来打包发布到pypi.
+
 
 #### 新特性
 + 新增数字验证码模式
 + 字体尺寸根据图片长宽自适应
 
 
-Start
+Guide
 ---
+
 ####Install####
 ```
 pip install DjangoCaptcha
 or
 easy_install DjangoCaptcha
 ```
-####Display(views.py)####
+
+####Display####
+
 ```
+# views.py
 from DjangoCaptcha import Captcha
 def code(request):
     ca =  Captcha(request)
@@ -46,8 +51,9 @@ def code(request):
 
 ```
 
-####Check user's input(views.py)####
+#### Validate ####
 ```
+# Views.py
 from DjangoCaptcha import Captcha
 def index(request):
     _code = request.GET.get('code') or ''
@@ -70,7 +76,3 @@ Config
 ##### type fo code ('number'/'word')
 `ca.type = 'number'`
 
-
-More
-----
-+ <http://pythoner.net>
