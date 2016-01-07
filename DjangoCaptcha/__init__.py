@@ -181,7 +181,7 @@ class Captcha(object):
 
         if not code:
             return False
-
+        code = code.strip()
         _code = self.django_request.session.get(self.session_key) or ''
         self.django_request.session[self.session_key] = ''
         return _code.lower() == str(code).lower()
