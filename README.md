@@ -67,12 +67,13 @@ def index(request):
         return HttpResponse('验证失败')
 ```
 
-Config
+#### Config ####
 -----
-##### width of image
+##### width of captch image
 `ca.img_width` = 150
-##### height of image 
+##### height of captch image
 `ca.img_height` = 30
-##### type fo code ('number'/'word')
+##### type fo captch ('number'/'word')
 `ca.type = 'number'`
-
+or
+`ca.type = 'word'`
