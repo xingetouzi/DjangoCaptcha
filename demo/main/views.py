@@ -10,6 +10,8 @@ def code(request):
     assert ca_type in ['number', 'word']
 
     ca.type = ca_type
+    ca.img_width = 250
+    ca.img_height = 40
     return ca.display()
 
 def index(request):

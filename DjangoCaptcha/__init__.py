@@ -126,7 +126,6 @@ class Captcha(object):
         # set font size automaticly
         self.font_size = self._get_font_size()
 
-        # creat
         draw = ImageDraw.Draw(im)
 
         # draw noisy point/line
@@ -153,7 +152,7 @@ class Captcha(object):
         x = random.randrange(j,k) #starts point
         for i in self.code:
             # 上下抖动量,字数越多,上下抖动越大
-            m = int(len(self.code))
+            m = int(len(self.code)+1)
             y = random.randrange(1,3)
 
             if i in ('+','=','?'):
@@ -165,7 +164,7 @@ class Captcha(object):
 
             self.font = ImageFont.truetype(self.font_path.replace('\\','/'),self.font_size + int(ceil(m)))
             draw.text((x,y), i, font=self.font, fill=random.choice(self.font_color))
-            x += self.font_size*0.9
+            x += self.font_size*(random.randint(5, 6)/10.0) # 随机出现字符粘连
 
         del x
         del draw
