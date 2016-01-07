@@ -21,7 +21,7 @@ def index(request):
         return render('index.html',locals())
 
     ca = Captcha(request)
-    if ca.check(_code):
+    if ca.validate(_code):
         return HttpResponse("""<h1>^_^</h1><a href="/">back</a>""")
     return HttpResponse("""<h1>:-(</h1><a href="/">back</a>""")
 

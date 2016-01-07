@@ -30,9 +30,9 @@ current_path = os.path.normpath(os.path.dirname(__file__))
 class Captcha(object):
 
     def __init__(self,request):
-        """   初始化,设置各种属性
-
+        """ something init
         """
+
         self.django_request = request
         self.session_key = '_django_captcha_key'
         self.words = []
@@ -46,16 +46,16 @@ class Captcha(object):
 
     def _get_font_size(self):
         """  将图片高度的80%作为字体大小
-
         """
+
         s1 = int(self.img_height * 0.8)
         s2 = int(self.img_width/len(self.code))
         return int(min((s1,s2)) + max((s1,s2))*0.05)
 
     def _get_words(self):
-        """   读取默认的单词表
-
+        """ The words list
         """
+
         # TODO  扩充单词表
 
         if self.words:
@@ -103,7 +103,7 @@ class Captcha(object):
         return fun()
 
     def display(self):
-        """  生成验证码图片
+        """  The captch image output using Django response object
         """
 
         # font color
@@ -176,7 +176,7 @@ class Captcha(object):
 
     def validate(self, code):
         """ 
-        检查用户输入的验证码是否正确 
+        validate user's input
         """
 
         if not code:
@@ -187,6 +187,10 @@ class Captcha(object):
         return _code.lower() == str(code).lower()
 
     def check(self,code):
+        """
+        This function will no longer be supported after  version  0.4
+        """
+
         return self.validate(code)
 
 
