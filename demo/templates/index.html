@@ -1,10 +1,23 @@
 <html>
     <title>DjangoVerifyCode Demo</title>
+    <head>
+        <style>
+            a.selected{font-weight:800;}
+            img{margin:10px;}
+        </style>
+
+    </head>
     <body>
-        <img src='/code/'>
+        <div id="tab">
+            captch type: <a href="/?type=word" class='{% if ca_type == "word" %}selected{% endif %}'>word</a> 
+            <a href="/?type=number"  class='{% if ca_type == "number" %}selected{% endif %}'>number</a>
+        </div>
+
+        <img src='/code/?type={{ ca_type }}'>
         <form method='GET','action'='/'>
             <input name='code'>
             <input type='submit' value='check'>
         </form>
+
     </body>
 </html>
