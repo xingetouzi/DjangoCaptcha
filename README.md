@@ -7,6 +7,8 @@ DjangoCaptcha
 ----
 在django中生成英文单词验证码,提供验证码图片生成,检查验证码等功能
 
+live demo [http://django-captcha.t-y.me/](http://django-captcha.t-y.me/)
+
 
 #### 新特性
 + 新增数字验证码模式
