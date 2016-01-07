@@ -13,7 +13,7 @@
             <a href="/?type=number"  class='{% if ca_type == "number" %}selected{% endif %}'>number</a>
         </div>
 
-        <img src='/code/?type={{ ca_type }}'>
+        <a href="/?type={{ ca_type }}" title="click to refresh"><img src='/code/?type={{ ca_type }}'></a>
         <form method='GET','action'='/'>
             <input name='code'>
             <input type='submit' value='check'>
