@@ -59,7 +59,7 @@ def index(request):
         return render('index.html',locals())
 
     ca = Captcha(request)
-    if ca.check(_code):
+    if ca.validate(_code):
         return HttpResponse('验证成功')
     else:
         return HttpResponse('验证失败')
