@@ -169,8 +169,8 @@ class Captcha(object):
         self.font_color = ['black','darkblue','darkred']
 
         # background color
-        #self.background = (random.randrange(230,255),random.randrange(230,255),random.randrange(230,255))
-        self.background = (random.randrange(0,50),random.randrange(0,50),random.randrange(0, 50))
+        r, g, b = (65,) * 3
+        self.background = (random.randrange(0, r),random.randrange(0, g),random.randrange(0, b))
 
         # font path
         #self.font_path = os.path.join(current_path,'timesbi.ttf')
