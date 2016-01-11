@@ -132,7 +132,7 @@ class Captcha(object):
         # save your work (converting back to mode='1' or whatever..)
         return out.convert(img.mode)
 
-    def _draw_text(self, draw, position, text, font, fill, padding=1, outline='white'):
+    def _draw_text(self, draw, position, text, font, fill, padding=2, outline='white'):
         """ 画描边字体
         """
         x, y = position
@@ -208,12 +208,14 @@ class Captcha(object):
         for i in self.code:
             # 有一半的几率旋转字符
             rotate_value = self._get_roate_value(i)
-
-            i_im = Image.new('RGBA',(self.font_size, self.font_size), (0,0,0,0))
+        
+            # 经验值,当验证码图片尺寸为250*40时候，字符图为30*30合适
+            i_im = Image.new('RGBA',(int(self.img_height*0.9),int(self.img_height*0.9) ), (0,0,0,0))
             i_draw = ImageDraw.Draw(i_im)
             
             font = ImageFont.truetype(self.font_path.replace('\\','/'), self.font_size)
             fill=random.choice(self.font_color)
+
             # 画描边字体
             self._draw_text(i_draw, (0, 0), i, font, fill)
             
@@ -221,13 +223,15 @@ class Captcha(object):
             i_im = i_im.rotate(rotate_value, expand=1).resize(i_im.size) if rotate_value > 0 else i_im
 
             # 跟随函数曲线上下抖动
-            delta_y = int(math.ceil(sin_y_dict[int(delta_x)] * 0.5) - i_im.height/2.0)
+            delta_y_max = self.img_height - i_im.height
+            delta_y = int(math.ceil(sin_y_dict[int(delta_x)] * 0.5))
             
             box = (delta_x, delta_y, delta_x+i_im.width, delta_y+i_im.height)
             im.paste(i_im, box, i_im)
 
             # 字符粘连
             delta_x += int(math.ceil(self.font_size*0.45)) 
+
 
         # 图形扭曲参数 
         params = [1 - float(random.randint(1, 2)) / 100, 

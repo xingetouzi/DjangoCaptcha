@@ -5,7 +5,6 @@ from DjangoCaptcha import Captcha
 
 def code(request):
     ca =  Captcha(request)
-    #ca.words = ['hello','world','helloworld']
     ca_type = request.GET.get('type', 'word').lower()
     assert ca_type in ['number', 'word']
 
