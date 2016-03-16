@@ -19,7 +19,8 @@ limitations under the License.
 
 from django.http import HttpResponse
 from PIL import Image,ImageDraw,ImageFont
-import random,StringIO
+import random
+from io import BytesIO
 import os
 from math import ceil
 
@@ -169,7 +170,7 @@ class Captcha(object):
 
         del x
         del draw
-        buf = StringIO.StringIO()
+        buf = BytesIO()
         im.save(buf,'gif')
         buf.closed
         return HttpResponse(buf.getvalue(),'image/gif')
