@@ -20,7 +20,7 @@ limitations under the License.
 from django.http import HttpResponse
 from PIL import Image,ImageDraw,ImageFont
 import random
-from io import BytesIO
+from six import BytesIO
 import os
 from math import ceil
 
